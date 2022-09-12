@@ -165,7 +165,7 @@ class PaddleOcrJson implements AutoCloseable {
 public class Main {
     public static void main(String[] args) {
         // paddleocr_json 的可执行文件所在路径
-        String exePath = "C:\\TruelyTemp\\paddleocr_json_java\\Umi-OCR-main\\PaddleOCR-json\\PaddleOCR_json.exe";
+        String exePath = "path/to/executable";
 
         // 可选的配置项
         Map<String, Object> arguments = new HashMap<>();
@@ -175,7 +175,7 @@ public class Main {
         try (PaddleOcrJson ocr = new PaddleOcrJson(new File(exePath), arguments)) {
 
             // 对一张图片进行 OCR
-            String imgPath = "C:\\TruelyTemp\\paddleocr_json_java\\text.png";
+            String imgPath = "path/to/img";
             OcrResponse resp = ocr.runOcr(new File(imgPath));
 
             // 读取结果
