@@ -80,7 +80,7 @@ class OcrResponse {
     }
 }
 
-public class PaddleOcrJson implements AutoCloseable {
+public class Ocr implements AutoCloseable {
     Process p;
     BufferedReader reader;
     BufferedWriter writer;
@@ -88,7 +88,7 @@ public class PaddleOcrJson implements AutoCloseable {
 
     boolean ocrReady = false;
 
-    public PaddleOcrJson(File exePath, Map<String, Object> arguments) throws IOException {
+    public Ocr(File exePath, Map<String, Object> arguments) throws IOException {
         gson = new Gson();
 
         String commands = "";

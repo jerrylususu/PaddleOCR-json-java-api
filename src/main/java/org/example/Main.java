@@ -15,7 +15,7 @@ public class Main {
         // arguments.put("use_angle_cls", true);
 
         // 初始化 OCR
-        try (PaddleOcrJson ocr = new PaddleOcrJson(new File(exePath), arguments)) {
+        try (Ocr ocr = new Ocr(new File(exePath), arguments)) {
 
             // 对一张图片进行 OCR
             String imgPath = "path/to/img";

@@ -8,6 +8,7 @@ A thin wrapper for [PaddleOCR-json](https://github.com/hiroi-sora/PaddleOCR-json
 ## Usage
 1. Include 'PaddleOcrJson.java' in your project
 2. Invoke OCR as follows: (See [Main.java](https://github.com/jerrylususu/PaddleOCR-json-java-api/blob/main/src/main/java/org/example/Main.java))
+
 ```java
 // paddleocr_json 的可执行文件所在路径
 String exePath = "path/to/executable";
@@ -17,7 +18,7 @@ Map<String, Object> arguments = new HashMap<>();
 // arguments.put("use_angle_cls", true);
 
 // 初始化 OCR
-try (PaddleOcrJson ocr = new PaddleOcrJson(new File(exePath), arguments)) {
+try (Ocr ocr = new Ocr(new File(exePath), arguments)) {
 
     // 对一张图片进行 OCR
     String imgPath = "path/to/img";
