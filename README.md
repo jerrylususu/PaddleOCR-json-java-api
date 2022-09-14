@@ -36,3 +36,6 @@ try (Ocr ocr = new Ocr(new File(exePath), arguments)) {
     e.printStackTrace();
 }
 ```
+
+## Reference
+- Unicode to ASCII escape: [EscapedWriter from Soot Project](https://github.com/soot-oss/soot/blob/3966f565db6dc2882c3538ffc39e44f4c14b5bcf/src/main/java/soot/util/EscapedWriter.java)
