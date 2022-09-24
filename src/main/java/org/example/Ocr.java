@@ -189,11 +189,19 @@ public class Ocr implements AutoCloseable {
     }
 
     public OcrResponse runOcr(File imgFile) throws IOException {
+        return this.runOcrOnPath(imgFile.toString());
+    }
+
+    public OcrResponse runOcrOnClipboard() throws IOException {
+        return this.runOcrOnPath("clipboard");
+    }
+
+    private OcrResponse runOcrOnPath(String path) throws IOException {
         if (!p.isAlive()) {
             throw new RuntimeException("OCR进程已经退出");
         }
         Map<String, String> reqJson = new HashMap<>();
-        reqJson.put("image_dir", imgFile.toString());
+        reqJson.put("image_dir", path);
         StringWriter sw = new StringWriter();
         EscapedWriter ew = new EscapedWriter(sw);
         gson.toJson(reqJson, ew);
@@ -210,6 +218,8 @@ public class Ocr implements AutoCloseable {
 
         return gson.fromJson(resp, OcrResponse.class);
     }
+
+
 
     @Override
     public void close() {
