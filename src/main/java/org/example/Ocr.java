@@ -213,7 +213,7 @@ public class Ocr implements AutoCloseable {
 
         Map rawJsonObj = gson.fromJson(resp, Map.class);
         if (rawJsonObj.get("data") instanceof String) {
-            return new OcrResponse(Integer.parseInt(rawJsonObj.get("code").toString()), rawJsonObj.get("data").toString());
+            return new OcrResponse((int)Double.parseDouble(rawJsonObj.get("code").toString()), rawJsonObj.get("data").toString());
         }
 
         return gson.fromJson(resp, OcrResponse.class);
