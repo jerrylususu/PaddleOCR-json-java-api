@@ -1,13 +1,14 @@
 # PaddleOCR-json-java-api
 
-A thin wrapper for [PaddleOCR-json](https://github.com/hiroi-sora/PaddleOCR-json).
+[PaddleOCR-json](https://github.com/hiroi-sora/PaddleOCR-json) 的简单 Java 封装。
 
-## Requires
+## 依赖
 - Gson
+- Java 8 或更新版本
 
-## Usage
-1. Include 'PaddleOcrJson.java' in your project
-2. Invoke OCR as follows: (See [Main.java](https://github.com/jerrylususu/PaddleOCR-json-java-api/blob/main/src/main/java/org/example/Main.java))
+## 使用
+1. 在项目中引入 'Ocr.java'
+2. 参考如下代码片段调用 OCR (或参考完整示例 [Main.java](https://github.com/jerrylususu/PaddleOCR-json-java-api/blob/main/src/main/java/org/example/Main.java))
 
 ```java
 // paddleocr_json 的可执行文件所在路径
@@ -37,5 +38,5 @@ try (Ocr ocr = new Ocr(new File(exePath), arguments)) {
 }
 ```
 
-## Reference
-- Unicode to ASCII escape: [EscapedWriter from Soot Project](https://github.com/soot-oss/soot/blob/3966f565db6dc2882c3538ffc39e44f4c14b5bcf/src/main/java/soot/util/EscapedWriter.java)
+## 参考
+- Unicode 转换为 ASCII 序列: [EscapedWriter (Soot Project)](https://github.com/soot-oss/soot/blob/3966f565db6dc2882c3538ffc39e44f4c14b5bcf/src/main/java/soot/util/EscapedWriter.java)
