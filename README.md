@@ -2,7 +2,7 @@
 
 [PaddleOCR-json](https://github.com/hiroi-sora/PaddleOCR-json) 的简单 Java 封装。
 
-v1.2 支持本地进程方式，v1.3 支持本地进程&套接字服务方式。
+v1.2 支持本地进程方式，v1.3 支持本地进程&套接字服务客户端方式。
 
 ## 依赖
 - Gson
@@ -21,7 +21,7 @@ Map<String, Object> arguments = new HashMap<>();
 String exePath = "path/to/executable"; // paddleocr_json 的可执行文件所在路径
 try (Ocr ocr = new Ocr(new File(exePath), arguments)) {
 
-// 使用套接字服务方式初始化 OCR
+// 使用套接字服务方式初始化 OCR（仅作为客户端，不启动服务）
 // try (Ocr ocr = new Ocr(serverAddr, serverPort, arguments)) {
     
     // 对一张图片进行 OCR

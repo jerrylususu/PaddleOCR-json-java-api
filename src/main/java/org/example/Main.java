@@ -17,7 +17,7 @@ public class Main {
         // 本地进程: new Ocr(new File(exePath), arguments)
         String exePath = "path_to_exe"; // paddleocr_json 的可执行文件所在路径
         try (Ocr ocr = new Ocr(new File(exePath), arguments)) {
-//        使用套接字服务器
+//        使用套接字服务器（仅作为客户端，不启动服务）
 //        try (Ocr ocr = new Ocr(serverAddr, serverPort, arguments)) {
 
 
