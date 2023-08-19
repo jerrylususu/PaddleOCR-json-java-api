@@ -22,7 +22,7 @@ String exePath = "path/to/executable"; // paddleocr_json 的可执行文件所�
 try (Ocr ocr = new Ocr(new File(exePath), arguments)) {
 
 // 使用套接字服务方式初始化 OCR
-// try (Ocr ocr = new Ocr("localhost", 23333, arguments)) {
+// try (Ocr ocr = new Ocr(serverAddr, serverPort, arguments)) {
     
     // 对一张图片进行 OCR
     String imgPath = "path/to/img";

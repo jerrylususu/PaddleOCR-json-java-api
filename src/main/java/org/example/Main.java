@@ -18,7 +18,7 @@ public class Main {
         String exePath = "path_to_exe"; // paddleocr_json 的可执行文件所在路径
         try (Ocr ocr = new Ocr(new File(exePath), arguments)) {
 //        使用套接字服务器
-//        try (Ocr ocr = new Ocr("localhost", 23333, arguments)) {
+//        try (Ocr ocr = new Ocr(serverAddr, serverPort, arguments)) {
 
 
 
