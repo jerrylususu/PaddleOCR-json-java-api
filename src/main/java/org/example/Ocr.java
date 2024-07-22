@@ -5,10 +5,7 @@ import com.google.gson.Gson;
 import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -188,30 +185,27 @@ public class Ocr implements AutoCloseable {
     private void initOcr() throws IOException {
         gson = new Gson();
 
-        String commands = "";
+        List<String> commandList = new ArrayList<>();
         if (arguments != null) {
             for (Map.Entry<String, Object> entry : arguments.entrySet()) {
-                String command = "--" + entry.getKey() + "=";
-                if (entry.getValue() instanceof String) {
-                    command += "'" + entry.getValue() + "'";
-                } else {
-                    command += entry.getValue().toString();
-                }
-                commands += ' ' + command;
+                commandList.add("--" + entry.getKey() + "=" + entry.getValue().toString());
             }
         }
 
-        if (!StandardCharsets.US_ASCII.newEncoder().canEncode(commands)) {
-            throw new IllegalArgumentException("参数不能含有非 ASCII 字符");
+        for (String c: commandList) {
+            if (!StandardCharsets.US_ASCII.newEncoder().canEncode(c)) {
+                throw new IllegalArgumentException("参数不能含有非 ASCII 字符");
+            }
         }
 
-        System.out.println("当前参数：" + (commands.isEmpty() ? "空": commands));
+        System.out.println("当前参数：" + (commandList.isEmpty() ? "空": commandList));
 
 
         switch (this.mode) {
             case LOCAL_PROCESS: {
                 File workingDir = exePath.getParentFile();
-                ProcessBuilder pb = new ProcessBuilder(exePath.toString(), commands);
+                commandList.add(0, exePath.toString());
+                ProcessBuilder pb = new ProcessBuilder(commandList);
                 pb.directory(workingDir);
                 pb.redirectErrorStream(true);
                 process = pb.start();
