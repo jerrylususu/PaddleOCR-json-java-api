@@ -35,7 +35,7 @@ jobs:
       - name: Download and extract binary
         run: |
           if [ "${{ matrix.os }}" == "ubuntu-22.04" ]; then
-            wget -O binary-file.tar.xz https://github.com/hiroi-sora/PaddleOCR-json/releases/download/v1.4.0/PaddleOCR-json_v1.4.0_debian_gcc_x86-64.tar.xz
+            wget --quiet -O binary-file.tar.xz https://github.com/hiroi-sora/PaddleOCR-json/releases/download/v1.4.0/PaddleOCR-json_v1.4.0_debian_gcc_x86-64.tar.xz
             mkdir -p extracted
             tar -xf binary-file.tar.xz -C extracted
           elif [ "${{ matrix.os }}" == "windows-latest" ]; then
@@ -55,8 +55,11 @@ jobs:
           echo "PADDLEOCR_JSON_TEST_IMG_PATH=$(pwd)/res/test.png" >> $GITHUB_ENV
         shell: bash
 
+      - name: Run install (silently)
+        run: mvn -B install
+
       - name: Run tests
-        run: mvn test
+        run: mvn -B test
         env:
-          BINARY_PATH: ${{ env.BINARY_PATH }}
-          TEST_PATH: ${{ env.TEST_PATH }}
+          PADDLEOCR_JSON_EXE_PATH: ${{ env.PADDLEOCR_JSON_EXE_PATH }}
+          PADDLEOCR_JSON_TEST_IMG_PATH: ${{ env.PADDLEOCR_JSON_TEST_IMG_PATH }}
