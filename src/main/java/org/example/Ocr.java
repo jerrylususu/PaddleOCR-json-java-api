@@ -229,7 +229,6 @@ public class Ocr implements AutoCloseable {
                 ocrReady = false;
                 while (!ocrReady) {
                     line = reader.readLine();
-                    System.out.println(line);
                     if (isLinux() && line.contains("not found (required by")) {
                         System.out.println("可能存在依赖库问题：" + line);
                         break;
