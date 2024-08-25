@@ -45,7 +45,7 @@ jobs:
       - name: Download and extract binary in Windows
         if: matrix.os == 'windows-latest'
         run: |
-          Invoke-WebRequest -Uri https://github.com/hiroi-sora/PaddleOCR-json/releases/download/v1.4.0/PaddleOCR-json_v1.4.0_windows_x86-64.7z　-OutFile "binary-file.zip"
+          Invoke-WebRequest -Uri https://github.com/hiroi-sora/PaddleOCR-json/releases/download/v1.4.0/PaddleOCR-json_v1.4.0_windows_x86-64.7z　-OutFile "binary-file.7z"
           New-Item -ItemType Directory -Path "extracted" -Force
           7z x binary-file.7z -oextracted
           $PADDLEOCR_JSON_EXE_PATH = "$(pwd)\extracted\PaddleOCR-json_v1.4.0\PaddleOCR-json.exe"
