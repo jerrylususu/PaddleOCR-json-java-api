@@ -296,6 +296,19 @@ public class Ocr implements AutoCloseable {
         StringWriter sw = new StringWriter();
         EscapedWriter ew = new EscapedWriter(sw);
         gson.toJson(reqJson, ew);
+
+        // 重建 socket，修复长时间无请求时 socket 断开（Software caused connection abort: socket write error ）
+        // https://github.com/hiroi-sora/PaddleOCR-json/issues/106
+        if (OcrMode.SOCKET_SERVER == mode) {
+            writer.close();
+            reader.close();
+            clientSocket.close();
+            clientSocket = new Socket(serverAddr, serverPort);
+            clientSocket.setKeepAlive(true);
+            reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(), StandardCharsets.UTF_8));
+            writer = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream(), StandardCharsets.UTF_8));
+        }
+
         writer.write(sw.getBuffer().toString());
         writer.write("\r\n");
         writer.flush();
