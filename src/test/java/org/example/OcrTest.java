@@ -54,6 +54,11 @@ public class OcrTest {
 
         // 在外层启动一个监听 kTestPort 的 paddleocr-json 服务
         try (Ocr ocrServer = new Ocr(new File(exePath), serverArguments)) {
+            
+            // 等开始监听
+            System.out.println("sleep 5s to make sure the server is listening");
+            Thread.sleep(5000);
+
             Map<String, Object> arugments = new HashMap<>();
             try (Ocr ocr = new Ocr("localhost", kTestPort, arugments)) {
 
