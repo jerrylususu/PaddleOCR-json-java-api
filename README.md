@@ -1,8 +1,10 @@
 # PaddleOCR-json-java-api
 
+[![CI](https://github.com/jerrylususu/PaddleOCR-json-java-api/actions/workflows/ci.yml/badge.svg)](https://github.com/jerrylususu/PaddleOCR-json-java-api/actions/workflows/ci.yml)
+
 [PaddleOCR-json](https://github.com/hiroi-sora/PaddleOCR-json) 的简单 Java 封装。
 
-v1.2 支持本地进程方式，v1.3 支持本地进程&套接字服务客户端方式。
+v1.2 支持本地进程方式，v1.3 支持本地进程&套接字服务客户端方式，v1.4 支持 Linux 版本。
 
 ## 依赖
 - Gson
