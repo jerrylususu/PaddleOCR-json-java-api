@@ -204,10 +204,21 @@ public class Ocr implements AutoCloseable {
         switch (this.mode) {
             case LOCAL_PROCESS: {
                 File workingDir = exePath.getParentFile();
+                if (isLinux()) {
+                    // Linux 下解压后的默认布局是 ../bin/exe，需要再往上一层
+                    workingDir = workingDir.getParentFile();
+                }
                 commandList.add(0, exePath.toString());
                 ProcessBuilder pb = new ProcessBuilder(commandList);
                 pb.directory(workingDir);
                 pb.redirectErrorStream(true);
+
+                if (isLinux()) {
+                    // Linux 下启动，需要设置 LD_LIBRARY_PATH，见 https://github.com/hiroi-sora/PaddleOCR-json/blob/main/cpp/README-linux.md
+                    File libLocation = new File(workingDir, "lib");
+                    pb.environment().put("LD_LIBRARY_PATH", libLocation.getAbsolutePath());
+                }
+
                 process = pb.start();
 
                 InputStream stdout = process.getInputStream();
@@ -351,6 +362,10 @@ public class Ocr implements AutoCloseable {
         return false;
     }
 
+
+    private static boolean isLinux() {
+        return System.getProperty("os.name").toLowerCase().contains("linux");
+    }
 
     @Override
     public void close() {
