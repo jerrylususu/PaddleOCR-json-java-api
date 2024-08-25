@@ -76,7 +76,7 @@ public class OcrTest {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
 
