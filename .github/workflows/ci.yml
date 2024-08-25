@@ -32,31 +32,25 @@ jobs:
         run: choco install 7zip -y
         shell: powershell
 
-      - name: Download and extract binary
+      - name: Download and extract binary in Linux
+        if: matrix.os == 'ubuntu-22.04'
         run: |
-          if [ "${{ matrix.os }}" == "ubuntu-22.04" ]; then
-            wget --quiet -O binary-file.tar.xz https://github.com/hiroi-sora/PaddleOCR-json/releases/download/v1.4.0/PaddleOCR-json_v1.4.0_debian_gcc_x86-64.tar.xz
-            mkdir -p extracted
-            tar -xf binary-file.tar.xz -C extracted
-          elif [ "${{ matrix.os }}" == "windows-latest" ]; then
-            Invoke-WebRequest -Uri https://github.com/hiroi-sora/PaddleOCR-json/releases/download/v1.4.0/PaddleOCR-json_v1.4.0_windows_x86-64.7z
-            mkdir -p extracted
-            7z x binary-file.7z -oextracted
-          fi
-        shell: bash
-
-      - name: Set environment variables
-        run: |
-          if [ "${{ matrix.os }}" == "ubuntu-22.04" ]; then
-            echo "PADDLEOCR_JSON_EXE_PATH=$(pwd)/extracted/PaddleOCR-json_v1.4.0_debian_gcc_x86-64/bin/PaddleOCR-json" >> $GITHUB_ENV
-          elif [ "${{ matrix.os }}" == "windows-latest" ]; then
-            echo "PADDLEOCR_JSON_EXE_PATH=$(pwd)/extracted/PaddleOCR-json_v1.4.0/PaddleOCR-json.exe" >> $GITHUB_ENV
-          fi
+          wget --quiet -O binary-file.tar.xz https://github.com/hiroi-sora/PaddleOCR-json/releases/download/v1.4.0/PaddleOCR-json_v1.4.0_debian_gcc_x86-64.tar.xz
+          mkdir -p extracted
+          tar -xf binary-file.tar.xz -C extracted
+          echo "PADDLEOCR_JSON_EXE_PATH=$(pwd)/extracted/PaddleOCR-json_v1.4.0_debian_gcc_x86-64/bin/PaddleOCR-json" >> $GITHUB_ENV
           echo "PADDLEOCR_JSON_TEST_IMG_PATH=$(pwd)/res/test.png" >> $GITHUB_ENV
         shell: bash
 
-      - name: Run install (silently)
-        run: mvn -B install
+      - name: Download and extract binary in Windows
+        if: matrix.os == 'windows-latest'
+        shell: powershell
+        run: |
+          Invoke-WebRequest -Uri https://github.com/hiroi-sora/PaddleOCR-json/releases/download/v1.4.0/PaddleOCR-json_v1.4.0_windows_x86-64.7z
+          mkdir -p extracted
+          7z x binary-file.7z -oextracted
+          echo "PADDLEOCR_JSON_EXE_PATH=$(pwd)/extracted/PaddleOCR-json_v1.4.0/PaddleOCR-json.exe" >> $GITHUB_ENV
+          echo "PADDLEOCR_JSON_TEST_IMG_PATH=$(pwd)/res/test.png" >> $GITHUB_ENV
 
       - name: Run tests
         run: mvn -B test
