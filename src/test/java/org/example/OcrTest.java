@@ -12,10 +12,10 @@ import static org.junit.Assert.assertEquals;
 
 public class OcrTest {
 
-    private static final String exePath = System.getProperty("paddleocr-json-exe-path", "C:\\Temporary\\paddleocr\\PaddleOCR-json_v1.4.0\\PaddleOCR-json.exe");
-    private static final String imgPath = System.getProperty("paddleocr-json-test-img-path", "C:\\Projects\\PaddleOCR-json-java-api\\res\\test.png");
+    private static final String exePath = System.getProperty("PADDLEOCR_JSON_EXE_PATH", "C:\\Temporary\\paddleocr\\PaddleOCR-json_v1.4.0\\PaddleOCR-json.exe");
+    private static final String imgPath = System.getProperty("PADDLEOCR_JSON_TEST_IMG_PATH", "C:\\Projects\\PaddleOCR-json-java-api\\res\\test.png");
     private static final String kTestContent = "helloworld";
-    private static final int kTestPort = Integer.parseInt(System.getProperty("paddleocr-json-port", "23333"));
+    private static final int kTestPort = Integer.parseInt(System.getProperty("PADDLEOCR_JSON_TEST_PORT", "23333"));
 
     @Test
     public void TestLocalMode() {
