@@ -44,7 +44,6 @@ jobs:
 
       - name: Download and extract binary in Windows
         if: matrix.os == 'windows-latest'
-        shell: powershell
         run: |
           Invoke-WebRequest -Uri https://github.com/hiroi-sora/PaddleOCR-json/releases/download/v1.4.0/PaddleOCR-json_v1.4.0_windows_x86-64.7z　-OutFile binary-file.zip
           New-Item -ItemType Directory -Path "extracted" -Force
@@ -53,9 +52,9 @@ jobs:
           $PADDLEOCR_JSON_TEST_IMG_PATH = "$(pwd)\res\test.png"
           echo "PADDLEOCR_JSON_EXE_PATH=$PADDLEOCR_JSON_EXE_PATH" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
           echo "PADDLEOCR_JSON_TEST_IMG_PATH=$PADDLEOCR_JSON_TEST_IMG_PATH" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        shell: powershell
 
-
-- name: Run tests
+      - name: Run tests
         run: mvn -B test
         env:
           PADDLEOCR_JSON_EXE_PATH: ${{ env.PADDLEOCR_JSON_EXE_PATH }}
