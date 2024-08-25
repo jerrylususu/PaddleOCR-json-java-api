@@ -12,13 +12,15 @@ import static org.junit.Assert.assertEquals;
 
 public class OcrTest {
 
-    private static final String exePath = System.getProperty("PADDLEOCR_JSON_EXE_PATH", "C:\\Temporary\\paddleocr\\PaddleOCR-json_v1.4.0\\PaddleOCR-json.exe");
-    private static final String imgPath = System.getProperty("PADDLEOCR_JSON_TEST_IMG_PATH", "C:\\Projects\\PaddleOCR-json-java-api\\res\\test.png");
+    private static final String exePath = System.getenv().getOrDefault("PADDLEOCR_JSON_EXE_PATH", "C:\\Temporary\\paddleocr\\PaddleOCR-json_v1.4.0\\PaddleOCR-json.exe");
+    private static final String imgPath = System.getenv().getOrDefault("PADDLEOCR_JSON_TEST_IMG_PATH", "C:\\Projects\\PaddleOCR-json-java-api\\res\\test.png");
     private static final String kTestContent = "helloworld";
-    private static final int kTestPort = Integer.parseInt(System.getProperty("PADDLEOCR_JSON_TEST_PORT", "23333"));
+    private static final int kTestPort = Integer.parseInt(System.getenv().getOrDefault("PADDLEOCR_JSON_TEST_PORT", "23333"));
 
     @Test
     public void TestLocalMode() {
+        System.out.println("using exePath: " + exePath);
+
         Map<String, Object> arguments = new HashMap<>();
 
         OcrResponse resp = null;
@@ -44,6 +46,8 @@ public class OcrTest {
 
     @Test
     public void TestSocketMode() {
+        System.out.println("using exePath: " + exePath);
+
         Map<String, Object> serverArguments = new HashMap<>();
         serverArguments.put("port", kTestPort);
         OcrResponse resp = null;

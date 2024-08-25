@@ -229,11 +229,20 @@ public class Ocr implements AutoCloseable {
                 ocrReady = false;
                 while (!ocrReady) {
                     line = reader.readLine();
+                    if (isLinux() && line.contains("not found (required by")) {
+                        System.out.println("可能存在依赖库问题：" + line);
+                        break;
+                    }
                     if (line.contains("OCR init completed")) {
                         ocrReady = true;
+                        break;
                     }
                 }
-                System.out.println("初始化OCR成功");
+                if (ocrReady) {
+                    System.out.println("初始化OCR成功");
+                } else {
+                    System.out.println("初始化OCR失败，请检查输出");
+                }
                 break;
             }
             case SOCKET_SERVER: {
