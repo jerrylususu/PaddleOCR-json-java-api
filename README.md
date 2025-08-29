@@ -14,6 +14,9 @@ v1.2 支持本地进程方式，v1.3 支持本地进程&套接字服务客户端
 1. 在项目中引入 'Ocr.java'
 2. 参考如下代码片段调用 OCR (或参考完整示例 [Main.java](https://github.com/jerrylususu/PaddleOCR-json-java-api/blob/main/src/main/java/org/example/Main.java))
 
+> 如果在 Linux 下使用，请参阅 [此 Issue](https://github.com/jerrylususu/PaddleOCR-json-java-api/issues/8) 。
+
+
 ```java
 // 可选的配置项
 Map<String, Object> arguments = new HashMap<>();
